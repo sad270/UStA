@@ -1,0 +1,88 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Inviter un nouvel utilisateur {% endblock %}
+{% block fos_user_content %}
+<div class="invitation_title-container">
+  <div class="container">
+    <h1 class="family-title text-right">
+      <span class="fa fa-hashtag"></span> Invitations
+    </h1>
+  </div>
+</div>
+<div class="unused_invitations-container">
+  <div class="container">
+    <h3 class="family-title">
+      <span class="fa fa-times-circle"></span> Invitations inutilisées
+    </h3>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Envoyé</th>
+            <th>Date</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+      {% for invitation in invitations if not invitation.user %}
+
+        <tr>
+          <td>{{ invitation.send ? '<span class="fa fa-check"></span>':'' }}</td>
+          <td>{{ invitation.date |date('d/m/Y') }}</td>
+          <td>{{ invitation.lastname}}</td>
+          <td>{{ invitation.firstname}}</td>
+          <td>{{ invitation.email}}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5" class="text-center">Aucune invitation inutilisé</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  </div>
+</div>
+<div class="used_invitations-container">
+  <div class="container">
+    <h3 class="family-title">
+      <span class="fa fa-check-circle"></span> Invitations utilisées
+    </h3>
+    <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Utilisateur</th>
+          <th>Date</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+    {% for invitation in invitations if invitation.user %}
+
+      <tr>
+        <td>{{ invitation.user.id }}</td>
+        <td>{{ invitation.date |date('d/m/Y') }}</td>
+        <td>{{ invitation.lastname}}</td>
+        <td>{{ invitation.firstname}}</td>
+        <td>{{ invitation.email}}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" class="text-center">Aucune invitation inutilisé</td>
+      </tr>
+    {% endfor %}
+  </table>
+  </div>
+  </div>
+</div>
+<div class="ebebeb-container invitation_form-container">
+  <div class="container">
+    <h3 class="family-title">
+      <span class="fa fa-ticket"></span> Inviter un nouvel utilisateur
+    </h3>
+    {{ form(form) }}
+  </div>
+</div>
+{% endblock fos_user_content %}

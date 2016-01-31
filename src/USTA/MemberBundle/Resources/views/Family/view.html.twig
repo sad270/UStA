@@ -1,0 +1,231 @@
+{% form_theme form "::MyBootstrap_3_horizontal_layout.html.twig" %}
+{% extends "USTAMemberBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+{% block bodyClass %}{{ parent() }} family-view{% endblock %}
+{% block body %}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ FAMILY-CONTAINER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div class="Family-container">
+  <div class="container">
+      <h1 class="family-title text-right">
+        <span class="fa fa-hashtag"></span> Famille N° <strong>{{ family.id }}</strong>
+        <a class="btn btn-default" href="{{ path('usta_family_edit', {'id' : family.id}) }}" role="button"><span class="fa fa-pencil"></span> Editer</a>
+        <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#delete-confirm"><span class="fa fa-trash-o"></span> Supprimer</button>
+      </h1>
+      <h3 class="family-title"><span class="fa fa-user"></span> Liste des Membres <button id="toggle-member-died" type="button" class="btn btn-primary pull-right" data-toggle="button" data-target=".member-died>td , .member-died>th" data-hide='<span class="fa fa-eye-slash"></span> Cacher les décès' data-show='<span class="fa fa-eye"></span> Afficher les décès' aria-pressed="false" autocomplete="off"><span class="fa fa-eye"></span> Afficher les décès</button></h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-muted" >id</th>
+              <th>Lien</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Date de Naissance</th>
+              <th>Lieu de Naissance</th>
+              <th>Décès</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for member in family.members %}
+            <tr class="gender-{{ member.gender }} {% if member.deathDate %} member-died {% else %} living-member{% endif %}">
+              <th class="text-muted" >{{ member.id }}</th>
+              <td>{{ member.relationshipTwig }}</td>
+              <td>{{ member.lastname }}</td>
+              <td>{{ member.firstname }}</td>
+              <td>{{ member.birthDate |date('d/m/Y') }}</td>
+              <td>{{ member.birthPlace }}</td>
+              <td>{% if member.deathDate %}
+                {{ member.deathDate |date('d/m/Y') }} <br>à {{ member.deathPlace }} {% else %}<a class="btn btn-default btn-xs death-button" type="button" href="{{ path('usta_member_death', {'id' : member.id}) }}" ><span class="fa fa-moon-o"></span> Décès</a>
+              {% endif %}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="family-title"><span class="fa fa-map-marker"></span> Adresses</h3>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th class="text-muted" >id</th>
+              <th>Type</th>
+              <th>Adresse</th>
+              <th>Code Postal</th>
+              <th>Ville</th>
+              <th>Pays</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for address in family.addresses %}
+            <tr >
+              <th class="text-muted" >{{ address.id }}</th>
+              <td>{{ address.type }}</td>
+              <td>{{ address.address }}</td>
+              <td>{{ address.zipcode }}</td>
+              <td>{{ address.city }}</td>
+              <td>{{ address.country }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h3 class="family-title"><span class="fa fa-phone"></span> Téléphones</h3>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th class="text-muted" >id</th>
+              <th>Type</th>
+              <th>Numéro</th>
+              <th>Nom</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for phone in family.phones %}
+            <tr >
+              <th class="text-muted" >{{ phone.id }}</th>
+              <td>{{ phone.type }}</td>
+              <td>{{ phone.num }}</td>
+              <td>{{ phone.name }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h3 class="family-title"><span class="fa fa-envelope"></span> Emails</h3>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th class="text-muted" >id</th>
+              <th>Type</th>
+              <th>Email</th>
+              <th>Nom</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for email in family.emails %}
+            <tr >
+              <th class="text-muted" >{{ email.id }}</th>
+              <td>{{ email.type }}</td>
+              <td>{{ email.email }}</td>
+              <td>{{ email.name }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h3 class="family-title"><span class="fa fa-sticky-note"></span> Commentaire</h3>
+      <p>{{ family.note }}</p>
+    </div>
+  </div>
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ MEMBERSHIPFEE-CONTAINER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <div class="ebebeb-container MembershipFee-container">
+    <div class="container">
+      <h1 class="family-title text-right">
+        <span class="fa fa-hashtag"></span> Paiements
+      </h1>
+      <h3 class="family-title"><span class="fa fa-history"></span> Historique des Paiements</h3>
+      <p>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th class="text-muted" >id</th>
+              <th>ref</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Date</th>
+              <th>Année</th>
+              <th>Membres</th>
+              <th>Commentaire</th>
+            </tr>
+          </thead>
+        {% if membershipFeesHistory %}
+          {% for membershipFeeHistory in membershipFeesHistory %}
+            <tr>
+              <td class="text-muted" >{{ membershipFeeHistory.id }}</td>
+              <td>{{ membershipFeeHistory.reference}}</td>
+              <td>{{ membershipFeeHistory.lastname}}</td>
+              <td>{{ membershipFeeHistory.firstname}}</td>
+              <td>{{ membershipFeeHistory.date |date('d/m/Y') }}</td>
+              <td>{{ membershipFeeHistory.year}}</td>
+              <td>
+                <ul class="list-unstyled">
+                  {% for member in membershipFeeHistory.members %}
+                  <li><span class="text-muted">{{ member.id }}</span> {{ member.lastname }} {{ member.firstname }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              <td>{{ membershipFeeHistory.note}}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr class="text-center info">
+            <td colspan=8><span class="fa fa-info-circle"></span> Aucun paiement</td>
+          </tr>
+        {% endif %}
+      </table>
+    </div>
+      </p>
+      <h3 class="family-title"><span class="fa fa-eur"></span> Nouveau Paiement</h3>
+      {{ form_start(form) }}
+          {{ form_errors(form) }}
+          {{ form_row(form.members) }}
+          {{ form_row(form.lastname) }}
+          {{ form_row(form.firstname) }}
+          {{ form_row(form.date) }}
+          {{ form_row(form.year) }}
+          {{ form_row(form.reference) }}
+          {{ form_row(form.note) }}
+          {{ form_row(form.Valider) }}
+
+      {{ form_end(form) }}
+    </div>
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="delete-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><span class="fa fa-exclamation-triangle"></span> Voulez-vous vraiment supprimer la Famille N° <strong>{{ family.id }}</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p>Toute les données associées à cette famille (membres, Adresses, téléphone, emails, note) seront <strong>definitivement</strong> supprimer de la base de données.</p>
+      </div>
+      <div class="modal-footer">
+        <form id="delete-confirm-form" action="{{ path('usta_family_delete') }}" method="post">
+          <input type="hidden" name="usta_memberbundle_family_id" value="{example{ family.id }}" />
+          <button type="submit" form="delete-confirm-form" value="Submit" class="btn btn-default btn-danger"><span class="fa fa-trash-o"></span> SUPPRIMER</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-times"></span> Annuler</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+$(function() {
+  $($('#toggle-member-died').data("target")).wrapInner('<div>');
+  $($('#toggle-member-died').data("target")).hide(0);
+  $($('#toggle-member-died').data("target")).children().hide(0);
+  $('#toggle-member-died').click(function() {
+    $($(this).data("target")).slideToggle( "slow" );
+    $($(this).data("target")).children().slideToggle( "slow" );
+
+    if($(this).html() === $(this).data("show") ){
+      $(this).html($(this).data("hide"));
+    } else {
+      $(this).html($(this).data("show"));
+    }
+    //$($(this).data("target")).children().contents().unwrap();
+  })
+});
+</script>
+{% endblock %}

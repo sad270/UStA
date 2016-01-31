@@ -1,0 +1,14 @@
+{% extends "USTAMemberBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Index{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="panel panel-warning">
+  <div class="panel-heading">
+    <h2 class="panel-title"><span class="fa fa-exclamation-circle"></span> <strong>ERREUR :</strong> {{ errorTitle |striptags('<b>')|raw}}</h2>
+  </div>
+  <div class="panel-body">
+    <p>{{ errorBody |striptags('<strong>')|raw}}</p>
+  </div>
+</div>
+</div>
+{% endblock %}

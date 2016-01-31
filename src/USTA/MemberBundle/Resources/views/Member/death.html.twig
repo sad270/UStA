@@ -1,0 +1,10 @@
+{% form_theme form "::MyBootstrap_3_layout.html.twig" %}
+{% extends "USTAMemberBundle::layout.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+  <h1 class="family-title text-right">
+    <span class="fa">#</span> Déclaration d'un Décès</h1>
+    {{ form(form) }}
+{% endblock %}

@@ -1,0 +1,21 @@
+usta_family_add:
+    path:     /
+    defaults: { _controller: USTAMemberBundle:Family:addedit }
+
+usta_family_view:
+    path:     /view/{id}
+    defaults: { _controller: USTAMemberBundle:Family:view }
+    options:
+        expose: true
+    requirements:
+        id:   \d+
+
+usta_family_edit:
+    path:     /edit/{id}
+    defaults: { _controller: USTAMemberBundle:Family:addedit }
+    requirements:
+        id:   \d+
+
+usta_family_delete:
+    path:     /delete
+    defaults: { _controller: USTAMemberBundle:Family:delete }

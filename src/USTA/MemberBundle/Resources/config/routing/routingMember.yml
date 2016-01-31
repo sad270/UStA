@@ -1,0 +1,27 @@
+usta_member_death:
+    path:     /death/{id}
+    defaults: { _controller: USTAMemberBundle:Member:death }
+    requirements:
+        id:   \d+
+
+usta_member_add:
+    path:     /
+    defaults: { _controller: USTAMemberBundle:Member:add }
+
+usta_member_view:
+    path:     /view/{id}
+    defaults: { _controller: USTAMemberBundle:Member:view }
+    requirements:
+        id:   \d+
+
+usta_member_edit:
+    path:     /edit/{id}
+    defaults: { _controller: USTAMemberBundle:Member:edit }
+    requirements:
+        id:   \d+
+
+usta_member_delete:
+    path:     /delete/{id}
+    defaults: { _controller: USTAMemberBundle:Member:delete }
+    requirements:
+        id:   \d+

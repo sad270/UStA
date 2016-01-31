@@ -1,0 +1,49 @@
+{% extends "USTAMemberBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Index{% endblock %}
+{% block bodyClass %}{{ parent() }} dashboard{% endblock %}
+{% block body %}
+<div class="container">
+  <h1 class="dashboard-title text-right">
+    <span class="fa">#</span> Tableau de Bord
+  </h1>
+  <h3 class="dashboard-title"><span class="fa fa-moon-o"></span> Liste des Derniers Décès</h3>
+  <div class="table-responsive">
+    {% if results %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>id famille</th>
+          <th>id membre</th>
+          <th>Lien</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Date de Naissance</th>
+          <th>Lieu de Naissance</th>
+          <th>Date de Décès</th>
+          <th>Lieu de Décès</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for member in results %}
+          <tr class="gender-{{ member.gender }} member-died">
+            <th><a href="{{ path('usta_family_view', {'id': member.family.id}) }}">{{ member.family.id }}</a></th>
+            <th>{{ member.id }}</th>
+            <td>{{ member.relationshipTwig }}</td>
+            <td>{{ member.firstname }}</td>
+            <td>{{ member.lastname }}</td>
+            <td>{{ member.birthDate |date('d/m/Y') }}</td>
+            <td>{{ member.birthPlace }}</td>
+            <td>{{ member.deathDate |date('d/m/Y') }}</td>
+            <td>{{ member.deathPlace }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% else %}
+    <h3>Aucun décès déclaré</h3>
+    {% endif %}
+
+</div>
+{% endblock %}

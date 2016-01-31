@@ -1,0 +1,12 @@
+{# On étend notre layout #}
+{% if form is defined %}
+{% form_theme form "::MyBootstrap_3_horizontal_layout.html.twig" %}
+{% endif %}
+{% extends "::layout.html.twig" %}
+{% block title %}{{ parent() }} - Utilisateur{% endblock %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+{% endblock %}

@@ -1,0 +1,54 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Changer navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+
+
+
+
+
+
+        <a href="{{ path('usta_search_homepage') }}"><img alt="logo USTA" class="logo" src="{{ asset('assets/img/USTA-logo-300.png') }}"/></a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse text-center">
+      <ul class="nav navbar-nav">
+        <li class="navbar-text welcome visible-xs"><a href="{{ path('fos_user_profile_show') }}" class="navbar-link" title="Voir mon profil" >{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'usta_dashboard_homepage' %}active{% endif %}"><a href="{{ path('usta_dashboard_homepage') }}"><span class="fa fa-tachometer  fa-2x" aria-hidden="true"></span><br class="hidden-xs" /> Tableau de bord</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'usta_family_add' %}active{% endif %}"><a href="{{ path('usta_family_add') }}"><span class="fa fa-users  fa-2x" aria-hidden="true"></span><br class="hidden-xs"/> Membre</a></li>
+        <li class="{% if app.request.attributes.get('_route') == '_list' %}active{% endif %}"><a href="{{ path('usta_search_homepage') }}"><span class="fa fa-eur  fa-2x" aria-hidden="true"></span><br class="hidden-xs"/> Paiement</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="fa fa-cog fa-2x" aria-hidden="true"></span><br class="hidden-xs"/>  Paramètre<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li><a href="{{ path('fos_user_profile_show') }}">Voir mon profil</a></li>
+            <li><a href="{{ path('fos_user_profile_edit') }}">Editer mon profil</a></li>
+            <li><a href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a></li>
+            <li><a href="#about" data-toggle="modal" data-target="#about">À propos de USTA</a></li>
+            <!-- <li><a href="#">Réglages</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Profil</li>
+            <li><a href="#">Paramètre du profil</a></li>
+            <li><a href="#">Déconnexion</a></li> -->
+          </ul>
+        </li>
+      </ul>
+      <div class="navbar-right">
+        <p class="navbar-text pull-right welcome hidden-xs"><a href="{{ path('fos_user_profile_show') }}" class="navbar-link" title="Voir mon profil" >{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></p>
+        {% if app.request.attributes.get('_route') != 'usta_search_homepage' and app.request.attributes.get('_route') != 'usta_search_search'  %}
+        {{ render(controller('USTAMemberBundle:Search:searchForm')) }}
+        {% endif %}
+      </div>
+
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

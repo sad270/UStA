@@ -1,0 +1,3 @@
+usta_user_invite:
+    path:     /invite
+    defaults: { _controller: USTAUserBundle:Registration:invite }

@@ -1,0 +1,439 @@
+<?php
+
+namespace USTA\MemberBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use USTA\MemberBundle\Validator\Constraints as USTAMemberAssert;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Member
+ *
+ * @ORM\Table(indexes={@ORM\Index(name="lastname_idx", columns={"lastname"}, flags={"fulltext"}), @ORM\Index(name="lastname_firstname_idx", columns={"lastname", "firstname"}, flags={"fulltext"})}, options={"engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="USTA\MemberBundle\Repository\MemberRepository")/**
+ */
+class Member
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="USTA\MemberBundle\Entity\Family", inversedBy="members")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $family;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\Length(max=255)
+     */
+    private $lastname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\Length(max=255)
+     */
+    private $firstname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", length=1, options={"fixed" = true})
+     * @Assert\Length(max=1)
+     * @USTAMemberAssert\Gender
+     */
+    private $gender;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthDate", type="date")
+     */
+    private $birthDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="birthPlace", type="string", length=255)
+     * @Assert\Length(max=255)
+     */
+    private $birthPlace;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deathDate", type="date", nullable=true)
+     * @Assert\Date()
+     */
+    private $deathDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="deathPlace", type="string", length=255, nullable=true)
+     * @Assert\Length(max=255)
+     */
+    private $deathPlace;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="relationship", type="string", length=5)
+     * @Assert\Length(max=5)
+     * @USTAMemberAssert\Relationship
+     */
+    private $relationship;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="USTA\AccountBundle\Entity\MembershipFee", mappedBy="members")
+     */
+    private $membershipFees;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     * @return Member
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = strtoupper($lastname);
+
+        return $this;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return strtoupper($this->lastname);
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     * @return Member
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = ucfirst(strtolower($firstname));
+
+        return $this;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return ucfirst(strtolower($this->firstname));
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     * @return Member
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Get genderTwig
+     *
+     * @return string
+     */
+    public function getGenderTwig()
+    {
+      $gender_array = array(
+        'M'  => 'Homme',
+        'F'  => 'Femme'
+      );
+      if(array_key_exists($this->gender, $gender_array )){
+        return $gender_array[$this->gender];
+      }
+        return 'NC';
+    }
+    /**
+     * Get genderCharTwig
+     *
+     * @return string
+     */
+    public function genderCharTwig()
+    {
+      $gender_array = array(
+        'M'  => 'H',
+        'F'  => 'F'
+      );
+      if(array_key_exists($this->gender, $gender_array )){
+        return $gender_array[$this->gender];
+      }
+        return 'NC';
+    }
+
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime $birthDate
+     * @return Member
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * Set birthPlace
+     *
+     * @param string $birthPlace
+     * @return Member
+     */
+    public function setBirthPlace($birthPlace)
+    {
+        $this->birthPlace = $birthPlace;
+
+        return $this;
+    }
+
+    /**
+     * Get birthPlace
+     *
+     * @return string
+     */
+    public function getBirthPlace()
+    {
+        return $this->birthPlace;
+    }
+
+    /**
+     * Set deathDate
+     *
+     * @param \DateTime $deathDate
+     * @return Member
+     */
+    public function setDeathDate($deathDate)
+    {
+        $this->deathDate = $deathDate;
+
+        return $this;
+    }
+
+    /**
+     * Get deathDate
+     *
+     * @return \DateTime
+     */
+    public function getDeathDate()
+    {
+        return $this->deathDate;
+    }
+
+    /**
+     * Set deathPlace
+     *
+     * @param string $deathPlace
+     * @return Member
+     */
+    public function setDeathPlace($deathPlace)
+    {
+        $this->deathPlace = $deathPlace;
+
+        return $this;
+    }
+
+    /**
+     * Get deathPlace
+     *
+     * @return string
+     */
+    public function getDeathPlace()
+    {
+        return $this->deathPlace;
+    }
+
+    /**
+     * Set relationship
+     *
+     * @param string $relationship
+     * @return Member
+     */
+    public function setRelationship($relationship)
+    {
+        $this->relationship = $relationship;
+
+        $relationship_array = array(
+          'FATH'  => 'M',
+          'MOTH'  => 'F',
+          'SON'   => 'M',
+          'DAUGH' => 'F',
+          'GRFAT' => 'M',
+          'GRMOT' => 'F',
+          'GRGRF' => 'M',
+          'GRGRM' => 'F',
+          'NEPHE' => 'M',
+          'NIECE' => 'F',
+          'UNCLE' => 'M',
+          'AUNT'  => 'F',
+          'OTHRM' => 'M',
+          'OTHRF' => 'F'
+        );
+
+        $this->setGender($relationship_array[$relationship]);
+
+        return $this;
+    }
+
+    /**
+     * Get relationship
+     *
+     * @return string
+     */
+    public function getRelationship()
+    {
+        return $this->relationship;
+    }
+
+    /**
+     * Get relationshipTwig
+     *
+     * @return string
+     */
+    public function getRelationshipTwig()
+    {
+      $relationship_array = array(
+        'FATH'  => 'Père',
+        'MOTH'  => 'Mère',
+        'SON'   => 'Fils',
+        'DAUGH' => 'Fille',
+        'GRFAT' => 'Grand-père',
+        'GRMOT' => 'Grand-mère',
+        'GRGRF' => 'Arrière-grand-père',
+        'GRGRM' => 'Arrière-grand-mère',
+        'NEPHE' => 'Neveu',
+        'NIECE' => 'Nièce',
+        'UNCLE' => 'Oncle',
+        'AUNT'  => 'Tante',
+        'OTHRM' => 'Autre (Homme)',
+        'OTHRF' => 'Autre (Femme)'
+      );
+      if(array_key_exists($this->relationship, $relationship_array )){
+        return $relationship_array[$this->relationship];
+      }
+        return 'NC';
+    }
+
+    /**
+     * Set family
+     *
+     * @param \USTA\MemberBundle\Entity\Family $family
+     * @return Member
+     */
+    public function setFamily(\USTA\MemberBundle\Entity\Family $family)
+    {
+        $this->family = $family;
+
+        return $this;
+    }
+
+    /**
+     * Get family
+     *
+     * @return \USTA\MemberBundle\Entity\Family
+     */
+    public function getFamily()
+    {
+        return $this->family;
+    }
+
+    public function __construct()
+    {
+      $this->membershipFees = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add membershipFee
+     *
+     * @param \USTA\AccountBundle\Entity\MembershipFee $membershipFee
+     *
+     * @return Member
+     */
+    public function addMembershipFee(\USTA\AccountBundle\Entity\MembershipFee $membershipFee)
+    {
+        $this->membershipFees[] = $membershipFee;
+
+        return $this;
+    }
+
+    /**
+     * Remove membershipFee
+     *
+     * @param \USTA\AccountBundle\Entity\MembershipFee $membershipFee
+     */
+    public function removeMembershipFee(\USTA\AccountBundle\Entity\MembershipFee $membershipFee)
+    {
+        $this->membershipFees->removeElement($membershipFee);
+    }
+
+    /**
+     * Get membershipFees
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMembershipFees()
+    {
+        return $this->membershipFees;
+    }
+}

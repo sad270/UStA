@@ -1,0 +1,15 @@
+usta_search_redirect:
+    path:      /
+    defaults: { _controller: USTAMemberBundle:Search:searchRedirect }
+
+usta_search_search:
+    path:      /{keyword}/{page}
+    defaults: { _controller: USTAMemberBundle:Search:search, page: 1 }
+    requirements:
+        page: \d*
+
+usta_search_searchAJAX:
+    path:     /AJAX/{firstname_lastname}
+    defaults: { _controller: USTAMemberBundle:Search:searchAJAX }
+    options:
+        expose: true

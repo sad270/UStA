@@ -1,0 +1,56 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        main:
+            id: fos_user.user_provider.username
+        in_memory:
+            memory: ~
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        # … le pare-feu « dev »
+        dev:
+            pattern: (^/(_(profiler|wdt)|css|images|js)/)|(^/_console$)
+            security: false
+
+        # On crée un pare-feu uniquement pour le formulaire
+        main_login:
+            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            # pattern:   ^/login$
+            pattern:  ^/User/(login$|register/?$|resetting$)
+            anonymous: true # On autorise alors les anonymes sur ce pare-feu
+
+        # Firewall principal pour le reste de notre site
+        main:
+            pattern:        ^/
+            anonymous:      false
+            provider:       main
+            form_login:
+                login_path: /User/login
+                check_path: /User/login_check
+            logout:
+                path:       /User/logout
+                target:     /User/login
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 14400 # 4 hours in seconds
+                path:     /
+                # by default, the feature is enabled by checking a
+                # checkbox in the login form (see below), uncomment the
+                # following line to always enable it.
+                #always_remember_me: true
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html

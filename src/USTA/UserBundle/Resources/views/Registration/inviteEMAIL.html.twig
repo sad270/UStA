@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>[UStA] Code d'activation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body  style="margin: 0; padding: 0;font-family:Helvetica, arial, sans-serif;">
+ <table bgcolor="#ededed" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td>
+     <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+       <tr>
+         <td align="center" bgcolor="#ededed">
+          <img src="{{ absolute_url(asset('assets/img/USTA-logo-black-300.png')) }}" alt="Logo UStA" width="300" height="154" style="display: block;" />
+         </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#CF3D25">
+&nbsp;
+         </td>
+       </tr>
+       <tr>
+         <td bgcolor="#ffffff" style="padding: 30px 30px 30px 30px;">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+             <td style="color:#202c28;font-size:16px;">
+               Bonjour {{invitation.firstname}} {{invitation.lastname}},
+             </td>
+            </tr>
+            <tr>
+             <td align="center" style="color:#202c28;font-size:16px;">
+               <h3>Vous venez de recevoir votre code d'activation&nbsp;!</h3>
+             </td>
+            </tr>
+            <tr>
+             <td align="center" style="font-size: 50px;font-weight: bold;color: #CF3D25;">
+              {{invitation.code}}
+             </td>
+            </tr>
+            <tr>
+             <td>
+               &nbsp;
+             </td>
+            </tr>
+            <tr>
+             <td align="center" valign="middle" height="40" bgcolor="#CF3D25">
+               <a href="{{ absolute_url('fos_user_registration_register') }}" style="text-decoration:none; color:#FFFFFF; font-weight:bold; height:40px; line-height:40px;display:block;">
+                 Inscriptions
+               </a>
+             </td>
+            </tr>
+            <tr>
+             <td align="center" style="color:#202c28;font-size:16px;">
+               <h4>Vous n'êtes pas à l'origine de cette demande ?</h4>
+             </td>
+            </tr>
+            <tr>
+              <td align="center" style="color:#202c28;font-size:14px;">
+                 Si vous n'êtes pas à l'origine de la demande d'invitation ne tenez pas compte de cet email, le code sera automatiquement supprimé.
+             </td>
+            </tr>
+           </table>
+         </td>
+       </tr>
+       <tr>
+         <td bgcolor="#CF3D25" style="padding: 15px 30px 15px 30px; color:#ededed;font-size:13px;">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td align="center">
+                 &copy; Copyright 2016 - Yasin SENEL &amp; Sadetdin EYILI
+                </td>
+              </tr>
+           </table>
+         </td>
+       </tr>
+     </table>
+   </td>
+  </tr>
+  <tr>
+   <td>
+     &nbsp;
+   </td>
+  </tr>
+ </table>
+</body>
+</html>

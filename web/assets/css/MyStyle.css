@@ -1,0 +1,283 @@
+.ebebeb-container .container{
+  background-color: #ebebeb;
+}
+/*~~~~~~~~~~LOGIN~~~~~~~~~~*/
+.body-login {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #ebebeb;
+}
+
+.body-login .form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.body-login .form-signin .form-signin-heading,
+.body-login .form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.body-login .form-signin .checkbox {
+  font-weight: normal;
+}
+.body-login .form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.body-login .form-signin .form-control:focus {
+  z-index: 2;
+}
+.body-login .form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.body-login .form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+/*~~~~~~~~~~MAIN~~~~~~~~~~*/
+body {
+  padding-top: 90px;
+}
+
+.family-title>.fa,
+.dashboard-title>.fa
+{
+  color: #cf3d25;
+}
+q:before,
+blockquote .blockquote-body:before {
+  font: normal normal normal 14px/1 FontAwesome;
+	content:"\f10d";
+  display: block;
+  margin: -10px 5px -30px 5px;
+  font-size: 30px;
+  color: #ebebeb;
+}
+q:after,
+blockquote .blockquote-body:after {
+  font: normal normal normal 14px/1 FontAwesome;
+	content:"\f10e";
+  display: block;
+  margin: -30px 5px 10px 5px;
+  float: right;
+  font-size: 30px;
+  color: #ebebeb;
+}
+
+/*~~~~~~~~~~FOOTER~~~~~~~~~~*/
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.body-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+.body-footer a{
+  color : #777;
+  text-decoration: underline;
+}
+.body-footer .container {
+  border-top: #a4301d solid 1px;
+  padding: 1em;
+}
+@media screen and (max-width: 767px) {
+  .body-footer {
+    height: 100px;
+  }
+}
+/*~~~~~~~~~~NAVBAR~~~~~~~~~~*/
+.navbar .logo{
+    max-width: 170px;
+margin-bottom: -20px;
+}
+
+.navbar .welcome{
+margin:3px 15px;
+}
+
+.navbar .navbar-form{
+  margin:0;
+}
+
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+  max-height: none;
+}
+
+/*~~~~~~~~~~TABLE~~~~~~~~~~*/
+
+/*member-died*/
+/*.table > thead > tr.member-died,
+.table > tbody > tr.member-died,
+.table > tfoot > tr.member-died{
+  display: none;
+}*/
+/*living-member*/
+.table > thead > tr > td.living-member,
+.table > tbody > tr > td.living-member,
+.table > tfoot > tr > td.living-member,
+.table > thead > tr > th.living-member,
+.table > tbody > tr > th.living-member,
+.table > tfoot > tr > th.living-member,
+.table > thead > tr.living-member > td,
+.table > tbody > tr.living-member > td,
+.table > tfoot > tr.living-member > td,
+.table > thead > tr.living-member > th,
+.table > tbody > tr.living-member > th,
+.table > tfoot > tr.living-member > th {
+  font-weight: bold;
+}
+/*.table-hover > tbody > tr > td.living-member:hover,
+.table-hover > tbody > tr > th.living-member:hover,
+.table-hover > tbody > tr.living-member:hover > td,
+.table-hover > tbody > tr:hover > .living-member,
+.table-hover > tbody > tr.living-member:hover > th {
+  font-weight: bold;
+}*/
+
+/*M gender*/
+.table > thead > tr > td.gender-M,
+.table > tbody > tr > td.gender-M,
+.table > tfoot > tr > td.gender-M,
+.table > thead > tr > th.gender-M,
+.table > tbody > tr > th.gender-M,
+.table > tfoot > tr > th.gender-M,
+.table > thead > tr.gender-M > td,
+.table > tbody > tr.gender-M > td,
+.table > tfoot > tr.gender-M > td,
+.table > thead > tr.gender-M > th,
+.table > tbody > tr.gender-M > th,
+.table > tfoot > tr.gender-M > th {
+    background-color: #bbeeff;
+}
+.table-hover > tbody > tr > td.gender-M:hover,
+.table-hover > tbody > tr > th.gender-M:hover,
+.table-hover > tbody > tr.gender-M:hover > td,
+.table-hover > tbody > tr:hover > .gender-M,
+.table-hover > tbody > tr.gender-M:hover > th {
+    background-color: #a2e8ff;
+}
+/*F gender*/
+.table > thead > tr > td.gender-F,
+.table > tbody > tr > td.gender-F,
+.table > tfoot > tr > td.gender-F,
+.table > thead > tr > th.gender-F,
+.table > tbody > tr > th.gender-F,
+.table > tfoot > tr > th.gender-F,
+.table > thead > tr.gender-F > td,
+.table > tbody > tr.gender-F > td,
+.table > tfoot > tr.gender-F > td,
+.table > thead > tr.gender-F > th,
+.table > tbody > tr.gender-F > th,
+.table > tfoot > tr.gender-F > th {
+    background-color: #ffbbee;
+}
+.table-hover > tbody > tr > td.gender-F:hover,
+.table-hover > tbody > tr > th.gender-F:hover,
+.table-hover > tbody > tr.gender-F:hover > td,
+.table-hover > tbody > tr:hover > .gender-F,
+.table-hover > tbody > tr.gender-F:hover > th {
+    background-color: #ffa2e8;
+}
+
+/*~~~~~~~~~~FORM~~~~~~~~~~*/
+.add-link.btn>span{ /*fix overflow*/
+  display: inline-block;
+  line-height: normal;
+  /*vertical-align: middle;*/
+}
+
+.add-link.btn{
+  height: 100%;
+  width: 100%;
+  margin: 5px;
+  padding: 5px 15px;
+  font-size: 30px;
+  border-style: dashed;
+  border-width: 5px;
+  white-space: normal;
+}
+
+/*~~~~~~~~~~TYPEAHEAD~~~~~~~~~~*/
+span.twitter-typeahead{
+    width: 100%;
+    vertical-align: bottom;
+}
+span.twitter-typeahead .tt-menu{
+  width: 100%;
+  border: 1px solid #EBEBEB;
+  background-color: #FFFFFF;
+}
+span.twitter-typeahead .tt-menu .tt-suggestion{
+  display: block;
+  margin: 0;
+  padding: 5px;
+  cursor: pointer;
+  color: #777777;
+}
+span.twitter-typeahead .tt-menu .tt-suggestion .tt-highlight{
+  color: #000000;
+}
+span.twitter-typeahead .tt-menu .tt-suggestion:hover{
+  background-color: #ebebeb;
+}
+/*~~~~~~~~~~MEDIA~~~~~~~~~~*/
+
+@media (min-width: 768px){
+  .navbar-nav > li > a {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px){
+  .navbar-nav > li > a {
+  font-size:0.8em;
+  padding-top: 18px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  }
+  .container-fluid .navbar-header{
+  margin-left:-15px;
+  }
+}
+
+
+/*OLDUSTA*/
+
+.fa.indice {
+  position: relative;
+  top: 0.2em;
+  left: 0.6em;
+  text-shadow: #B33520 1px 1px 1px,
+  #B33520 -1px 1px 1px,
+  #B33520 -1px -1px 1px,
+  #B33520 1px -1px 1px;
+}
+.btn-primary .fa-inverse {
+  color: #B33520;
+}
+.dash-title{
+    color: #B33520;
+}
+.dash-stat{
+    font-size: 4em;
+}

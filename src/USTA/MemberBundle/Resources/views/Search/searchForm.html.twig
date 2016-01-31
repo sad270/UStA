@@ -1,0 +1,11 @@
+  {{ form_start(form, {'attr': {'style': 'width:100%;max-width:700px;margin:auto;', 'class': 'navbar-form typeahead-member-search-menu-top'}}) }}
+      <div class="input-group">
+    {{ form_row(form.firstname_lastname) }}
+    <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit" ><span class="fa fa-search"></span></button>
+    </span>
+      </div>
+
+    {{ form_errors(form.firstname_lastname) }}
+    {{ form_errors(form) }}
+  {{ form_end(form) }}

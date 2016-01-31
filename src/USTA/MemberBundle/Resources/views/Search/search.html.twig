@@ -1,0 +1,70 @@
+{% extends "USTAMemberBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Index{% endblock %}
+{% block bodyClass %}{{ parent() }} search{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="search-row clearfix">
+      <div class="search-logo-wrap" style="float:left;width:72px; margin-right: 10px;">
+        <img alt="logo USTA" class="logo img-responsive" src="{{ asset('assets/img/USTA-logo-black.png') }}"/>
+      </div>
+        {{ form_start(form, {'attr': {'style': 'float:left;width:85%;', 'class': 'typeahead-member-search-search'}}) }}
+          <div class="form-group">
+            <div class="input-group">
+          {{ form_row(form.firstname_lastname) }}
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit" ><span class="fa fa-search"></span></button>
+            </span>
+            </div>
+          </div>
+
+          {{ form_errors(form.firstname_lastname) }}
+          {{ form_errors(form) }}
+        {{ form_end(form) }}
+  </div>
+  <div class="well well-sm">
+    {{ nbResults }} résultat(s)
+  </div>
+  <ul class="list-unstyled">
+    {% if results %}
+      {% for member in results %}
+        <li>
+          <a href="{{ path('usta_family_view', {'id': member.family.id}) }}">
+            <h3> {{ member.lastname|upper }} {{ member.firstname|title }}</h3>
+          </a>
+            <ul class="list-unstyled">
+              <li>Nom : <strong>{{ member.lastname|upper }}</strong> Prénom : <strong>{{ member.firstname|title }}</strong> </li>
+              <li>Lien : <strong>{{ member.relationshipTwig }}</strong> Genre : <strong>{{ member.genderTwig }}</strong> </li>
+              <li>Né(e) le <strong>{{ member.birthDate|date('d/m/Y') }}</strong> à <strong>{{ member.birthPlace }}</strong></li>
+              <li>Famille N° <strong>{{ member.family.id }}</strong></li>
+
+            </ul>
+        </li>
+      {% endfor %}
+    {% else %}
+          <li><h3>Aucun resultat</h3></li>
+    {% endif %}
+</ul>
+{% if nbPages > 1 %}
+  <nav>
+    <ul class="pagination">
+      <li {% if page == 1 %} class="disabled"{% endif %}>
+        <a href="{% if page == 1 %}#{% else %}{{ path('usta_search_search', {'keyword': form.vars.value.firstname_lastname, 'page': (page - 1)}) }}{% endif %}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+      {% for p in range(1, nbPages) %}
+        <li{% if p == page %} class="active"{% endif %}>
+          <a href="{{ path('usta_search_search', {'keyword': form.vars.value.firstname_lastname, 'page': p}) }}">{{ p }}</a>
+        </li>
+      {% endfor %}
+      <li {% if page == nbPages %} class="disabled"{% endif %}>
+        <a href="{% if page == nbPages %}#{% else %}{{ path('usta_search_search', {'keyword': form.vars.value.firstname_lastname, 'page': (page + 1)}) }}{% endif %}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

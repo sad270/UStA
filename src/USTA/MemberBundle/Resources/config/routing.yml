@@ -1,0 +1,15 @@
+routing_USTAMemberBundle_Family:
+    resource: "@USTAMemberBundle/Resources/config/routing/routingFamily.yml"
+    prefix: /Family
+
+routing_USTAMemberBundle_Member:
+    resource: "@USTAMemberBundle/Resources/config/routing/routingMember.yml"
+    prefix: /Member
+
+routing_USTAMemberBundle_Search:
+    resource: "@USTAMemberBundle/Resources/config/routing/routingSearch.yml"
+    prefix: /Search
+
+usta_search_homepage:
+    path:     /
+    defaults: { _controller: USTAMemberBundle:Search:home }

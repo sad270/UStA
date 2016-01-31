@@ -1,0 +1,24 @@
+{% extends "USTAMemberBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Index{% endblock %}
+{% block bodyClass %}{{ parent() }} index{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="index-logo-wrap" style="margin:0 auto;width:90%;max-width:500px;">
+    <img alt="logo USTA" class="logo img-responsive" src="{{ asset('assets/img/USTA-logo-black.png') }}"/>
+  </div>
+  {{ form_start(form, {'attr': {'style': 'width:100%;max-width:700px;margin:auto;', 'class': 'typeahead-member-search-home'}}) }}
+    <div class="form-group">
+      <div class="input-group">
+    {{ form_row(form.firstname_lastname) }}
+      <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit" ><span class="fa fa-search"></span></button>
+      </span>
+      </div>
+    </div>
+
+    {{ form_errors(form.firstname_lastname) }}
+    {{ form_errors(form) }}
+  {{ form_end(form) }}
+
+</div>
+{% endblock %}

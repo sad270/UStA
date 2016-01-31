@@ -1,0 +1,30 @@
+{% form_theme form "::MyBootstrap_3_layout.html.twig" %}
+{% extends "USTAMemberBundle::layout.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+  <h1 class="family-title text-right">
+    <span class="fa fa-hashtag"></span> Nouvelle Famille</h1>
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    <h3 class="family-title"><span class="fa fa-user"></span> Liste des Membres</h3>
+      {{ form_row(form.members) }}
+    <h3 class="family-title"><span class="fa fa-map-marker"></span> Adresses</h3>
+    {{ form_row(form.addresses) }}
+    <h3 class="family-title"><span class="fa fa-phone"></span> Téléphones</h3>
+    {{ form_row(form.phones) }}
+    <h3 class="family-title"><span class="fa fa-envelope"></span> Emails</h3>
+    {{ form_row(form.emails) }}
+    <h3 class="family-title"><span class="fa fa-sticky-note"></span> Commentaire</h3>
+    {{ form_row(form.note) }}
+
+{{ form_end(form) }}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('assets/js/form.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/form-add-button.js') }}"></script>
+{% endblock %}
