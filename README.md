@@ -1,7 +1,7 @@
 # UStA
 [//]: # (A Symfony project created on August 3, 2015, 7:07 pm.)
 
-**UStA** (**U**ser **St**orage **A**pplication) est une application Web de gestion des cotisations annuelle des membres d'une association.
+**UStA** (**U**ser **St**orage **A**pplication) est une application Web de gestion des cotisations annuelles des membres d'une association.
 
   - Développeurs : **Yasin SENEL** & **Sadetdin EYILI**
   - À : **Bordeaux <3**
@@ -30,6 +30,7 @@ Le code source de USTA est disponible sur GitHub et est sous Licence libre MIT
 
 >La licence donne à toute personne recevant le logiciel le droit illimité de l'utiliser, le copier, le modifier, le fusionner, le publier, le distribuer, le vendre et de changer sa licence.
 source [Wikipedia][df1]
+
 ### Todos
 
  - Guide d'installation
