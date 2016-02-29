@@ -1,6 +1,16 @@
 <?php
 
-// Attention la table membershipFees_members est genere automatiquement par Doctrine et utilise un engine InnoDB par defaut, si lors de la creation de cette table vous avez des probleme vous devez donc la creer vous même en lui mettant un engin MyISAM
+/** Attention la table membershipFees_members est genere automatiquement par Doctrine et utilise un engine InnoDB par defaut, si lors de la creation de cette table vous avez des probleme vous devez donc la creer vous même en lui mettant un engin MyISAM
+SQL>>
+DROP TABLE usta_membershipFees_members;
+CREATE TABLE usta_membershipFees_members (
+membership_fee_id INT NOT NULL,
+member_id INT NOT NULL,
+PRIMARY KEY(membership_fee_id, member_id)
+)
+DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = MyISAM;
+
+*/
 
 namespace USTA\AccountBundle\Entity;
 
